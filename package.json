@@ -1,6 +1,6 @@
 {
   "name": "egg-ez-swagger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "eggPlugin": {
     "name": "EzSwagger"
@@ -34,6 +34,7 @@
     "autod": "autod"
   },
   "files": [
+    "lib",
     "app.js",
     "agent.js",
     "config",
