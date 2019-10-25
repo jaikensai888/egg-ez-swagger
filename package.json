@@ -1,6 +1,6 @@
 {
   "name": "egg-ez-swagger",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "",
   "eggPlugin": {
     "name": "EzSwagger"
@@ -10,7 +10,9 @@
     "eggPlugin",
     "egg-plugin"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "ncp": "^2.0.0"
+  },
   "devDependencies": {
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
@@ -38,7 +40,8 @@
     "app.js",
     "agent.js",
     "config",
-    "app"
+    "app",
+    "swagger"
   ],
   "ci": {
     "version": "8, 10"

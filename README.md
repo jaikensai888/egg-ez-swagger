@@ -34,11 +34,13 @@ $ npm i egg-ez-swagger --save
 
 ```js
 // {app_root}/config/plugin.js
-exports.eggEzSwagger = {
+exports.swagger = {
   enable: true,
   package: 'egg-ez-swagger',
 };
+//{app_root}/
 ```
+
 
 ## Configuration
 
