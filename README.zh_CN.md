@@ -24,52 +24,71 @@
 Description here.
 -->
 
-## 依赖说明
+## 安装
 
-### 依赖的 egg 版本
+```bash
+$ npm i egg-ez-swagger --save
+```
 
-egg-ez-swagger 版本 | egg 1.x
---- | ---
-1.x | 😁
-0.x | ❌
-
-### 依赖的插件
-<!--
-
-如果有依赖其它插件，请在这里特别说明。如
-
-- security
-- multipart
-
--->
-
-## 开启插件
+## 用法
 
 ```js
-// config/plugin.js
-exports.eggEzSwagger = {
+// {app_root}/config/plugin.js
+exports.swagger = {
   enable: true,
   package: 'egg-ez-swagger',
 };
+// {app_root}/config/config.default.js
+exports.swagger = {
+  host: '127.0.0.1:7001',
+}
 ```
 
-## 使用场景
+## 例子
 
-- Why and What: 描述为什么会有这个插件，它主要在完成一件什么事情。
-尽可能描述详细。
-- How: 描述这个插件是怎样使用的，具体的示例代码，甚至提供一个完整的示例，并给出链接。
+```js
+// {app_root}/app/router.js
+module.exports = app => {
+ const {
+    createSwagger
+  } = app.swaggerHelper;
 
-## 详细配置
+  const gps = require('./routes/gps')(app);
+  const routes = Object.assign(gps);
 
-请到 [config/config.default.js](config/config.default.js) 查看详细配置项说明。
+  createSwagger(routes, app.config.swagger);
+};
 
-## 单元测试
+```
 
-<!-- 描述如何在单元测试中使用此插件，例如 schedule 如何触发。无则省略。-->
+新建routes文件夹
 
-## 提问交流
+```js
 
-请到 [egg issues](https://github.com/eggjs/egg/issues) 异步交流。
+// {app_root}/app/routes/gps/js
+const tagName = 'Gps模块';
+module.exports = app => {
+  const {
+    eggPropTypes
+  } = app.swaggerHelper;
+  const route = {
+    '/Api/gps/getData': {
+      summary: '获取数据',
+      description: '',
+      tag: tagName,
+      method: 'post',
+      action: app.controller.gpsController.getData,
+      model: {
+        data: eggPropTypes.stringArray,
+      },
+    },
+  };
+  return route;
+};
+```
+
+运行程序，访问则可
+127.0.0.7001/public/swagger/index.html
 
 ## License
 

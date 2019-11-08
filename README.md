@@ -38,27 +38,57 @@ exports.swagger = {
   enable: true,
   package: 'egg-ez-swagger',
 };
-//{app_root}/
-```
-
-
-## Configuration
-
-```js
 // {app_root}/config/config.default.js
-exports.eggEzSwagger = {
-};
+exports.swagger = {
+  host: '127.0.0.1:7001',
+}
 ```
-
-see [config/config.default.js](config/config.default.js) for more detail.
 
 ## Example
 
-<!-- example here -->
+```js
+// {app_root}/app/router.js
+module.exports = app => {
+ const {
+    createSwagger
+  } = app.swaggerHelper;
 
-## Questions & Suggestions
+  const gps = require('./routes/gps')(app);
+  const routes = Object.assign(gps);
 
-Please open an issue [here](https://github.com/eggjs/egg/issues).
+  createSwagger(routes, app.config.swagger);
+};
+
+```
+
+create new folder routes
+
+```js
+
+// {app_root}/app/routes/gps/js
+const tagName = 'Gps模块';
+module.exports = app => {
+  const {
+    eggPropTypes
+  } = app.swaggerHelper;
+  const route = {
+    '/Api/gps/getData': {
+      summary: '获取数据',
+      description: '',
+      tag: tagName,
+      method: 'post',
+      action: app.controller.gpsController.getData,
+      model: {
+        data: eggPropTypes.stringArray,
+      },
+    },
+  };
+  return route;
+};
+```
+
+run process
+127.0.0.7001/public/swagger/index.html
 
 ## License
 
