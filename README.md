@@ -87,7 +87,7 @@ module.exports = app => {
 };
 ```
 
-run process
+run process then you can access swagger by
 127.0.0.7001/public/swagger/index.html
 
 ## License
